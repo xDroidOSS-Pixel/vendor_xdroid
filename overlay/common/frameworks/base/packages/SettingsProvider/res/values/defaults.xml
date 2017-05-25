@@ -22,4 +22,6 @@
          for immersive mode.
          Override to disable immersive mode confirmation for certain packages. -->
     <string name="def_immersive_mode_confirmations" translatable="false">confirmed</string>
+    
+    <bool name="def_wifi_on">true</bool>
 </resources>
