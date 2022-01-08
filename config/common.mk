@@ -201,6 +201,7 @@ PRODUCT_PACKAGE_OVERLAYS += \
     vendor/xdroid/overlay/common
 
 PRODUCT_PACKAGES += \
+    AndroidBlackThemeOverlay \
     CustomFontPixelLauncherOverlay \
     DocumentsUIOverlay \
     NetworkStackOverlay \
