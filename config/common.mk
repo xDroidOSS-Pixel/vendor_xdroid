@@ -197,6 +197,7 @@ PRODUCT_PACKAGE_OVERLAYS += \
     vendor/xdroid/overlay/common
 
 PRODUCT_PACKAGES += \
+    CustomFontPixelLauncherOverlay \
     DocumentsUIOverlay \
     NetworkStackOverlay \
     ThemedIconsOverlay \
