@@ -33,6 +33,7 @@ SOONG_CONFIG_xdroidGlobalVars += \
     bootloader_message_offset \
     camera_uses_newer_hidl_override_format \
     gralloc_handle_has_reserved_size \
+    target_alternative_futex_waiters \
     target_init_vendor_lib \
     target_ld_shim_libs \
     target_surfaceflinger_udfps_lib \
@@ -65,6 +66,7 @@ SOONG_CONFIG_xdroidQcomVars_supports_extended_compress_format := $(AUDIO_FEATURE
 SOONG_CONFIG_xdroidQcomVars_uses_pre_uplink_features_netmgrd := $(TARGET_USES_PRE_UPLINK_FEATURES_NETMGRD)
 SOONG_CONFIG_xdroidGlobalVars_needs_oplus_tag := $(TARGET_NEEDS_OPLUS_VENDOR_TAG)
 SOONG_CONFIG_xdroidGlobalVars_camera_uses_newer_hidl_override_format := $(TARGET_CAMERA_USES_NEWER_HIDL_OVERRIDE_FORMAT)
+SOONG_CONFIG_xdroidGlobalVars_target_alternative_futex_waiters := $(TARGET_ALTERNATIVE_FUTEX_WAITERS)
 
 # Set default values
 BOOTLOADER_MESSAGE_OFFSET ?= 0
