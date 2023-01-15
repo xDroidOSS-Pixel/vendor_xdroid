@@ -49,7 +49,8 @@ SOONG_CONFIG_xdroidGlobalVars += \
     uses_camera_parameter_lib \
     uses_legacy_fd_fbdev \
     needs_oplus_tag \
-    uses_oplus_camera
+    uses_oplus_camera \
+    uses_nothing_camera
 
 SOONG_CONFIG_NAMESPACES += xdroidNvidiaVars
 SOONG_CONFIG_xdroidNvidiaVars += \
@@ -94,6 +95,7 @@ SOONG_CONFIG_xdroidQcomVars_uses_qti_camera_device := $(TARGET_USES_QTI_CAMERA_D
 SOONG_CONFIG_xdroidGlobalVars_gralloc_handle_has_reserved_size := $(TARGET_GRALLOC_HANDLE_HAS_RESERVED_SIZE)
 SOONG_CONFIG_xdroidGlobalVars_needs_oplus_tag := $(TARGET_NEEDS_OPLUS_VENDOR_TAG)
 SOONG_CONFIG_xdroidGlobalVars_uses_oplus_camera := $(TARGET_USES_OPLUS_CAMERA)
+SOONG_CONFIG_xdroidGlobalVars_uses_nothing_camera := $(TARGET_USES_NOTHING_CAMERA)
 
 # Set default values
 BOOTLOADER_MESSAGE_OFFSET ?= 0
