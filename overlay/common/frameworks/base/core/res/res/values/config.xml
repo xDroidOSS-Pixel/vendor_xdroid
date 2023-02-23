@@ -147,4 +147,15 @@
     <!-- Flag indicating whether notification and ringtone volumes
          are controlled together (aliasing is true) or not. -->
     <bool name="config_alias_ring_notif_stream_types">false</bool>
+
+    <!-- Default list of files pinned by the Pinner Service -->
+    <string-array translatable="false" name="config_defaultPinnerServiceFiles">
+        <item>"/apex/com.android.art/javalib/core-oj.jar"</item>
+        <item>"/apex/com.android.art/javalib/core-libart.jar"</item>
+        <item>"/system/framework/framework.jar"</item>
+        <item>"/system/framework/services.jar"</item>
+        <item>"/system/bin/surfaceflinger"</item>
+        <item>"/system_ext/priv-app/SystemUIGoogle/SystemUIGoogle.apk"</item>
+        <item>"/system_ext/priv-app/SystemUIGoogle/oat/arm64/SystemUIGoogle.odex"</item>
+    </string-array>
 </resources>
