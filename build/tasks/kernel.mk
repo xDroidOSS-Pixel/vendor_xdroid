@@ -233,6 +233,9 @@ ifneq ($(TARGET_KERNEL_CLANG_COMPILE),false)
         endif
         PATH_OVERRIDE += LD_LIBRARY_PATH=$(TARGET_KERNEL_CLANG_PATH)/lib64:$$LD_LIBRARY_PATH
     endif
+    ifneq ($(TARGET_KERNEL_CLANG_AOSP), true)
+        PATH_OVERRIDE += LD_LIBRARY_PATH=$(TARGET_KERNEL_CLANG_PATH)/lib:$$LD_LIBRARY_PATH
+    endif
     PATH_OVERRIDE += PATH=$(TARGET_KERNEL_CLANG_PATH)/bin:$$PATH
     ifeq ($(KERNEL_CC),)
         CLANG_EXTRA_FLAGS := --cuda-path=/dev/null
