@@ -131,6 +131,9 @@ PRODUCT_RESTRICT_VENDOR_FILES := false
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/xdroid/overlay
 DEVICE_PACKAGE_OVERLAYS += vendor/xdroid/overlay/common
 
+# Speed profile services and wifi-service to reduce RAM and storage
+PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
+
 # FRAMEWORK COMPATIBILITY MATRIX FOR LINEAGE HALs
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += vendor/xdroid/config/device_framework_matrix.xml
 
