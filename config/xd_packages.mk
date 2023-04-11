@@ -28,7 +28,10 @@ PRODUCT_PACKAGES += \
 
 # GameSpace
 PRODUCT_PACKAGES += \
-    GameSpace \
+    GameSpace
+    
+# ViMusic
+PRODUCT_PACKAGES += \
     ViMusic
 
 # xdroid Additions

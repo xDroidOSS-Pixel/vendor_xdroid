@@ -16,28 +16,28 @@
 #
 
 # xd. version
-include vendor/xdroid/config/xd_version.mk
+$(call inherit-product, vendor/xdroid/config/xd_version.mk)
 
 # xd. packages
-include vendor/xdroid/config/xd_packages.mk
+$(call inherit-product, vendor/xdroid/config/xd_packages.mk)
 
 # xd. props
-include vendor/xdroid/config/xd_props.mk
+$(call inherit-product, vendor/xdroid/config/xd_props.mk)
 
 # xd. font
-include vendor/xdroid/config/font.mk
+$(call inherit-product, vendor/xdroid/config/font.mk)
 
 # xd. signed
-include vendor/xdroid/config/xd_signed.mk
+$(call inherit-product, vendor/xdroid/config/xd_signed.mk)
 
 # xdroid overlays
-include vendor/xdroid/config/xd_overlays.mk
+$(call inherit-product, vendor/xdroid/config/xd_overlays.mk)
 
 # xdroid audio
-include vendor/xdroid/config/audio.mk
+$(call inherit-product, vendor/xdroid/config/audio.mk)
 
 # xdroid bootanimation
-include vendor/xdroid/config/bootanimation.mk
+$(call inherit-product, vendor/xdroid/config/bootanimation.mk)
 
 # xd. permissions
 PRODUCT_COPY_FILES += \
