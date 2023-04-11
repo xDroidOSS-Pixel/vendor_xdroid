@@ -47,7 +47,8 @@ SOONG_CONFIG_xdroidGlobalVars += \
     target_trust_usb_control_enable \
     target_trust_usb_control_disable \
     uses_camera_parameter_lib \
-    uses_legacy_fd_fbdev
+    uses_legacy_fd_fbdev \
+    needs_oplus_tag
 
 SOONG_CONFIG_NAMESPACES += xdroidNvidiaVars
 SOONG_CONFIG_xdroidNvidiaVars += \
@@ -90,6 +91,7 @@ SOONG_CONFIG_xdroidQcomVars_uses_pre_uplink_features_netmgrd := $(TARGET_USES_PR
 SOONG_CONFIG_xdroidQcomVars_uses_qcom_bsp_legacy := $(TARGET_USES_QCOM_BSP_LEGACY)
 SOONG_CONFIG_xdroidQcomVars_uses_qti_camera_device := $(TARGET_USES_QTI_CAMERA_DEVICE)
 SOONG_CONFIG_xdroidGlobalVars_gralloc_handle_has_reserved_size := $(TARGET_GRALLOC_HANDLE_HAS_RESERVED_SIZE)
+SOONG_CONFIG_xdroidGlobalVars_needs_oplus_tag := $(TARGET_NEEDS_OPLUS_VENDOR_TAG)
 
 # Set default values
 BOOTLOADER_MESSAGE_OFFSET ?= 0
