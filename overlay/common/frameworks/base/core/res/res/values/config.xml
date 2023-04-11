@@ -19,14 +19,18 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Disable stock components if installed -->
     <string-array name="config_globallyDisabledComponents" translatable="false">
+        <!-- Disable stock OTA components if installed -->
         <item>com.android.vending/com.google.android.finsky.systemupdate.SystemUpdateSettingsContentProvider</item>
         <item>com.android.vending/com.google.android.finsky.systemupdateactivity.SettingsSecurityEntryPoint</item>
         <item>com.android.vending/com.google.android.finsky.systemupdateactivity.SystemUpdateActivity</item>
-        <item>com.google.android.gms/com.google.android.gms.update.phone.PopupDialog</item>
+        <item>com.google.android.gms/com.google.android.gms.chimera.GmsIntentOperationService$GmsExternalReceiver</item>
         <item>com.google.android.gms/com.google.android.gms.update.OtaSuggestionSummaryProvider</item>
         <item>com.google.android.gms/com.google.android.gms.update.SystemUpdateActivity</item>
         <item>com.google.android.gms/com.google.android.gms.update.SystemUpdateGcmTaskService</item>
         <item>com.google.android.gms/com.google.android.gms.update.SystemUpdateService</item>
+        <item>com.google.android.gms/com.google.android.gms.update.phone.PopupDialog</item>
+        <!-- Disable Now Playing -->
+        <item>com.google.android.as/com.google.intelligence.sense.ambientmusic.history.AddShortcutActivity</item>
         <item>com.google.android.as/com.google.intelligence.sense.ambientmusic.history.HistoryContentProvider</item>
         <item>com.google.android.as/com.google.intelligence.sense.ambientmusic.history.HistoryActivity</item>
         <item>com.google.android.as/com.google.intelligence.sense.ambientmusic.AmbientMusicSettingsActivity</item>
@@ -36,18 +40,6 @@
         <item>com.google.android.gms/com.google.android.gms.update.SystemUpdateService.ActiveReceiver</item>
         <item>com.google.android.gms/com.google.android.gms.update.SystemUpdateService.Receiver</item>
         <item>com.google.android.gms/com.google.android.gms.update.SystemUpdateService.SecretCodeReceiver</item>
-        <item>com.google.android.gms/com.google.android.gms.chimera.GmsIntentOperationService$GmsExternalReceiver</item>
-    </string-array>
-
-    <string-array name="config_locationExtraPackageNames" translatable="false">
-        <!-- Bluetooth -->
-        <item>com.android.bluetooth</item>
-        <!-- TeleService -->
-        <item>com.android.phone</item>
-        <!-- CneApp -->
-        <item>com.qualcomm.qti.cne</item>
-        <!-- ImsService -->
-        <item>com.shannon.imsservice</item>
     </string-array>
 
     <bool name="config_cellBroadcastAppLinks">true</bool>
@@ -74,4 +66,78 @@
     <!-- If this is true, long press on power button will be available from a
          non-interactive state. -->
     <bool name="config_supportLongPressPowerWhenNonInteractive">true</bool>
+
+    <!-- Face detection for screen auto rotation -->
+    <string name="config_defaultRotationResolverService" translatable="false">com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiRotationResolverService</string>
+
+    <!-- Flag indicating which package name can access DeviceConfig table -->
+    <string name="config_deviceConfiguratorPackageName" translatable="false">org.protonaosp.deviceconfig</string>
+
+    <!-- Wallpaper cropper package. Used as the default cropper if the active launcher doesn't
+         handle wallpaper cropping.
+    -->
+    <string name="config_wallpaperCropperPackage" translatable="false">com.android.wallpaper</string>
+
+    <!-- Component names of the services which will keep critical code path warm -->
+    <string-array name="config_keep_warming_services" translatable="false">
+        <item>com.google.android.GoogleCamera/com.google.android.apps.camera.prewarm.NoOpPrewarmService</item>
+    </string-array>
+
+    <!-- Control the behavior when the user long presses the power button.
+            0 - Nothing
+            1 - Global actions menu
+            2 - Power off (with confirmation)
+            3 - Power off (without confirmation)
+            4 - Go to voice assist
+            5 - Go to assistant (Settings.Secure.ASSISTANT)
+    -->
+    <integer name="config_longPressOnPowerBehavior">1</integer>
+
+    <!-- Control the behavior when the user presses the power and volume up buttons together.
+            0 - Nothing
+            1 - Mute toggle
+            2 - Global actions menu
+    -->
+    <integer name="config_keyChordPowerVolumeUp">1</integer>
+
+    <!-- Whether this device is supporting the microphone toggle -->
+    <bool name="config_supportsMicToggle">true</bool>
+    <!-- Whether this device is supporting the camera toggle -->
+    <bool name="config_supportsCamToggle">true</bool>
+
+    <!-- Control the default night mode to use when there is no other mode override set.
+         One of the following values (see UiModeManager.java):
+             0 - MODE_NIGHT_AUTO
+             1 - MODE_NIGHT_NO
+             2 - MODE_NIGHT_YES
+    -->
+    <integer name="config_defaultNightMode">2</integer>
+
+    <!-- The default value used for RawContacts.ACCOUNT_NAME when contacts are inserted without this
+         column set. These contacts are stored locally on the device and will not be removed even
+         if no android.account.Account with this name exists. A null string will be used if the
+         value is left empty. When this is non-empty then config_rawContactsLocalAccountType
+         should also be non-empty.  -->
+    <string name="config_rawContactsLocalAccountName" translatable="false">DEVICE</string>
+
+    <!-- The default value used for RawContacts.ACCOUNT_TYPE when contacts are inserted without this
+         column set. These contacts are stored locally on the device and will not be removed even
+         if no android.account.Account with this type exists. A null string will be used if the
+         value is left empty.  When this is non-empty then config_rawContactsLocalAccountName
+         should also be non-empty.-->
+    <string name="config_rawContactsLocalAccountType" translatable="false">com.android.contacts</string>
+
+    <!-- the number of the max cached processes in the system. -->
+    <integer name="config_customizedMaxCachedProcesses">64</integer>
+
+    <!-- Exempt AiAi from privacy indicators -->
+    <string name="config_systemAmbientAudioIntelligence">com.google.android.as</string>
+    <string name="config_systemAudioIntelligence">com.google.android.as</string>
+    <string name="config_systemNotificationIntelligence">com.google.android.as</string>
+    <string name="config_systemTextIntelligence">com.google.android.as</string>
+    <string name="config_systemUiIntelligence">com.google.android.as</string>
+    <string name="config_systemVisualIntelligence">com.google.android.as</string>
+
+    <!-- Whether or not to add a "people" notifications section -->
+    <bool name="config_usePeopleFiltering">true</bool>
 </resources>

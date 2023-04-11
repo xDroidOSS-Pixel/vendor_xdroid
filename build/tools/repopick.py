@@ -165,15 +165,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, description=textwrap.dedent('''\
         repopick.py is a utility to simplify the process of cherry picking
         patches from PixelExperience's Gerrit instance (or any gerrit instance of your choosing)
-
         Given a list of change numbers, repopick will cd into the project path
         and cherry pick the latest patch available.
-
         With the --start-branch argument, the user can specify that a branch
         should be created before cherry picking. This is useful for
         cherry-picking many patches into a common branch which can be easily
         abandoned later (good for testing other's changes.)
-
         The --abandon-first argument, when used in conjunction with the
         --start-branch option, will cause repopick to abandon the specified
         branch in all repos first before performing any cherry picks.'''))
@@ -403,8 +400,7 @@ if __name__ == '__main__':
 
         # Determine the maximum commits to check already picked changes
         check_picked_count = args.check_picked
-        max_count = '--max-count={0}'.format(check_picked_count + 1)
-        branch_commits_count = int(subprocess.check_output(['git', 'rev-list', '--count', max_count, 'HEAD'], cwd=project_path))
+        branch_commits_count = int(subprocess.check_output(['git', 'rev-list', '--count', 'HEAD'], cwd=project_path))
         if branch_commits_count <= check_picked_count:
             check_picked_count = branch_commits_count - 1
 

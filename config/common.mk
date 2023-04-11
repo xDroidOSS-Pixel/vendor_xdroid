@@ -1,195 +1,87 @@
-# Branding
-$(call inherit-product, vendor/aosp/config/branding.mk)
+#
+# Copyright (C) 2020 The ConquerOS Project
+# Copyright (C) 2021 a xdroid Prjkt
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
-PRODUCT_BRAND ?= PixelExperience
+# xd. version
+include vendor/xdroid/config/xd_version.mk
 
-PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
+# xd. packages
+include vendor/xdroid/config/xd_packages.mk
 
-ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.com.google.clientidbase=android-google
+# xd. props
+include vendor/xdroid/config/xd_props.mk
 
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.com.google.clientidbase=android-google
+# xd. font
+include vendor/xdroid/config/font.mk
 
-else
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.com.google.clientidbase=$(PRODUCT_GMS_CLIENTID_BASE)
+# xd. signed
+include vendor/xdroid/config/xd_signed.mk
 
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.com.google.clientidbase=$(PRODUCT_GMS_CLIENTID_BASE)
+# xdroid overlays
+include vendor/xdroid/config/xd_overlays.mk
 
+# xdroid audio
+include vendor/xdroid/config/audio.mk
+
+# xdroid bootanimation
+include vendor/xdroid/config/bootanimation.mk
+
+# xd. permissions
+PRODUCT_COPY_FILES += \
+    vendor/xdroid/config/permissions/xd_permissions.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/xd_permissions_system.xml \
+    vendor/xdroid/config/permissions/xd_permissions.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/xd_permissions_system-ext.xml \
+    vendor/xdroid/config/permissions/xd_permissions.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/xd_permissions_product.xml
+
+# xd. GMS
+$(call inherit-product, vendor/gms/gms_mini.mk)
+TARGET_SUPPORTS_GOOGLE_RECORDER ?= false
+TARGET_INCLUDE_STOCK_ARCORE ?= true
+TARGET_INCLUDE_LIVE_WALLPAPERS ?= false
+TARGET_SUPPORTS_QUICK_TAP ?= false
+TARGET_SUPPORTS_CALL_RECORDING ?= true
+
+# ART
+# Optimize everything for preopt
+PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := everything
+ifeq ($(TARGET_SUPPORTS_64_BIT_APPS), true)
+# Use 64-bit dex2oat for better dexopt time.
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dex2oat64.enabled=true
 endif
+
+# Backup Tool
+PRODUCT_COPY_FILES += \
+    vendor/xdroid/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
+    vendor/xdroid/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
+    vendor/xdroid/prebuilt/common/bin/50-xdroid.sh:$(TARGET_COPY_OUT_SYSTEM)/addon.d/50-xdroid.sh
+
+ifneq ($(strip $(AB_OTA_PARTITIONS) $(AB_OTA_POSTINSTALL_CONFIG)),)
+PRODUCT_COPY_FILES += \
+    vendor/xdroid/prebuilt/common/bin/backuptool_ab.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.sh \
+    vendor/xdroid/prebuilt/common/bin/backuptool_ab.functions:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.functions \
+    vendor/xdroid/prebuilt/common/bin/backuptool_postinstall.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_postinstall.sh
+endif
+
+# Backup Services whitelist
+PRODUCT_COPY_FILES += \
+    vendor/xdroid/config/permissions/backup.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/backup.xml
 
 # BtHelper
 PRODUCT_PACKAGES += \
     BtHelper
-
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    dalvik.vm.debug.alloc=0 \
-    ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
-    ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html \
-    ro.error.receiver.system.apps=com.google.android.gms \
-    ro.com.android.dataroaming=false \
-    ro.atrace.core.services=com.google.android.gms,com.google.android.gms.ui,com.google.android.gms.persistent \
-    ro.com.android.dateformat=MM-dd-yyyy \
-    persist.sys.disable_rescue=true
-
-ifeq ($(TARGET_BUILD_VARIANT),eng)
-# Disable ADB authentication
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.adb.secure=0
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += persist.sys.usb.config=adb
-else
-# Enable ADB authentication
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.adb.secure=1
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += persist.sys.usb.config=none
-
-# Disable extra StrictMode features on all non-engineering builds
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += persist.sys.strictmode.disable=true
-endif
-
-# Some permissions
-PRODUCT_COPY_FILES += \
-    vendor/aosp/config/permissions/privapp-permissions-lineagehw.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-lineagehw.xml
-
-# Copy all custom init rc files
-PRODUCT_COPY_FILES += \
-    vendor/aosp/prebuilt/common/etc/init/init.pixelexperience-updater.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.pixelexperience-updater.rc
-
-# Enable Android Beam on all targets
-PRODUCT_COPY_FILES += \
-    vendor/aosp/config/permissions/android.software.nfc.beam.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.nfc.beam.xml
-
-# Enable SIP+VoIP on all targets
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
-
-# Enable wireless Xbox 360 controller support
-PRODUCT_COPY_FILES += \
-    frameworks/base/data/keyboards/Vendor_045e_Product_028e.kl:$(TARGET_COPY_OUT_PRODUCT)/usr/keylayout/Vendor_045e_Product_0719.kl
-
-# Enforce privapp-permissions whitelist
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.control_privapp_permissions=enforce
-
-# Power whitelist
-PRODUCT_COPY_FILES += \
-    vendor/aosp/config/permissions/custom-power-whitelist.xml:system/etc/sysconfig/custom-power-whitelist.xml
-
-# Do not include art debug targets
-PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
-
-# Strip the local variable table and the local variable type table to reduce
-# the size of the system image. This has no bearing on stack traces, but will
-# leave less information available via JDWP.
-PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
-
-# Charger
-PRODUCT_PACKAGES += \
-    charger_res_images \
-    product_charger_res_images
-
-# Filesystems tools
-PRODUCT_PACKAGES += \
-    fsck.ntfs \
-    mke2fs \
-    mkfs.ntfs \
-    mount.ntfs
-
-# Config
-PRODUCT_PACKAGES += \
-    SimpleDeviceConfig
-
-# Storage manager
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.storage_manager.enabled=true
-
-# Media
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    media.recorder.show_manufacturer_and_model=true
-
-# Overlays
-PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
-    vendor/aosp/overlay
-
-PRODUCT_PACKAGE_OVERLAYS += \
-    vendor/aosp/overlay/common
-
-# TouchGestures
-PRODUCT_PACKAGES += \
-    TouchGestures
-
-# One Handed mode
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.support_one_handed_mode=true \
-
-# Dex preopt
-PRODUCT_DEXPREOPT_SPEED_APPS += \
-    SystemUIGoogle \
-    NexusLauncherRelease
-
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    dalvik.vm.systemuicompilerfilter=speed
-
-# SystemUI plugins
-PRODUCT_PACKAGES += \
-    QuickAccessWallet
-
-# Gboard configuration
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.com.google.ime.theme_id=5 \
-    ro.com.google.ime.system_lm_dir=/product/usr/share/ime/google/d3_lms
-
-# SetupWizard configuration
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.setupwizard.enterprise_mode=1 \
-    ro.setupwizard.rotation_locked=true \
-    setupwizard.enable_assist_gesture_training=true \
-    setupwizard.theme=glif_v3_light \
-    setupwizard.feature.baseline_setupwizard_enabled=true \
-    setupwizard.feature.skip_button_use_mobile_data.carrier1839=true \
-    setupwizard.feature.show_pai_screen_in_main_flow.carrier1839=false \
-    setupwizard.feature.show_pixel_tos=false
-
-# StorageManager configuration
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.storage_manager.show_opt_in=false
-
-# OPA configuration
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.opa.eligible_device=true
-
-# Google legal
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
-    ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html
-
-# Google Play services configuration
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.error.receiver.system.apps=com.google.android.gms \
-    ro.atrace.core.services=com.google.android.gms,com.google.android.gms.ui,com.google.android.gms.persistent
-
-# TextClassifier
-PRODUCT_PACKAGES += \
-	libtextclassifier_annotator_en_model \
-	libtextclassifier_annotator_universal_model \
-	libtextclassifier_actions_suggestions_universal_model \
-	libtextclassifier_lang_id_model
-
-# Apps
-PRODUCT_PACKAGES += \
-    Aperture
-
-# Use gestures by default
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural
-
-# Pixel customization
-TARGET_SUPPORTS_GOOGLE_RECORDER ?= true
-TARGET_INCLUDE_STOCK_ARCORE ?= true
-TARGET_INCLUDE_LIVE_WALLPAPERS ?= true
-TARGET_SUPPORTS_QUICK_TAP ?= false
-TARGET_SUPPORTS_CALL_RECORDING ?= true
 
 # Face Unlock
 TARGET_FACE_UNLOCK_SUPPORTED ?= true
@@ -202,29 +94,73 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.biometrics.face.xml
 endif
 
-# NexusLauncher resources
+# Enable Android Beam on all targets
+PRODUCT_COPY_FILES += \
+    vendor/xdroid/config/permissions/android.software.nfc.beam.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.nfc.beam.xml
+
+# Enable SIP+VoIP on all targets
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.sip.voip.xml
+
+# Enable wireless Xbox 360 controller support
+PRODUCT_COPY_FILES += \
+    frameworks/base/data/keyboards/Vendor_045e_Product_028e.kl:$(TARGET_COPY_OUT_PRODUCT)/usr/keylayout/Vendor_045e_Product_0719.kl
+
+# Enforce privapp-permissions whitelist
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.control_privapp_permissions=enforce
+
+# Do not include art debug targets
+PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
+
+# Strip the local variable table and the local variable type table to reduce
+# the size of the system image. This has no bearing on stack traces, but will
+# leave less information available via JDWP.
+PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
+
+# Disable vendor restrictions
+PRODUCT_RESTRICT_VENDOR_FILES := false
+
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/xdroid/overlay
+DEVICE_PACKAGE_OVERLAYS += vendor/xdroid/overlay/common
+
+# Sensitive Phone Numbers list
+PRODUCT_COPY_FILES += \
+    vendor/xdroid/prebuilt/common/etc/sensitive_pn.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sensitive_pn.xml
+
+# TextClassifier
 PRODUCT_PACKAGES += \
-    NexusLauncherResOverlay
+	libtextclassifier_annotator_en_model \
+	libtextclassifier_annotator_universal_model \
+	libtextclassifier_actions_suggestions_universal_model \
+	libtextclassifier_lang_id_model
+    
+# Enable whole-program R8 Java optimizations for SystemUI and system_server
+SYSTEM_OPTIMIZE_JAVA := true
+SYSTEMUI_OPTIMIZE_JAVA := true
 
-# Audio
-$(call inherit-product, vendor/aosp/config/audio.mk)
+# Use default filter for problematic apps.
+PRODUCT_DEXPREOPT_QUICKEN_APPS += \
+    Dialer
 
-# Bootanimation
-$(call inherit-product, vendor/aosp/config/bootanimation.mk)
+# Do not preoptimize prebuilts when building GApps
+DONT_DEXPREOPT_PREBUILTS := true
 
-# Fonts
-$(call inherit-product, vendor/aosp/config/fonts.mk)
+# Include Lineage LatinIME dictionaries
+PRODUCT_PACKAGE_OVERLAYS += vendor/xdroid/overlay/dictionaries
 
-# GMS
-$(call inherit-product, vendor/gms/products/gms.mk)
+# Disable EAP Proxy because it depends on proprietary headers
+# and breaks WPA Supplicant compilation.
+DISABLE_EAP_PROXY := true
 
-# OTA
-$(call inherit-product, vendor/aosp/config/ota.mk)
+include vendor/themes/statusbar.mk
 
-# RRO Overlays
-$(call inherit-product, vendor/aosp/config/rro_overlays.mk)
+PRODUCT_PACKAGES += \
+    YaapThemesStub
 
 # Pixel Framework
 $(call inherit-product, vendor/pixel-framework/config.mk)
 
--include $(WORKSPACE)/build_env/image-auto-bits.mk
+# init.rc
+$(foreach f,$(wildcard vendor/xdroid/prebuilt/etc/init/*.rc),\
+    $(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_SYSTEM)/etc/init/$(notdir $f)))
