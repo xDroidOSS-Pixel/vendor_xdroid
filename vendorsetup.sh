@@ -1,7 +1,9 @@
-lunch_others_targets=()
-for device in $(python vendor/aosp/tools/get_official_devices.py)
-do
-    for var in user userdebug eng; do
-        lunch_others_targets+=("aosp_$device-$var")
-    done
-done
+
+export AOSP_REVISION=$(grep "default revision" ".repo/manifests/default.xml" | awk -F '/' '{print $3}' | awk -F '"' '{print $1}')
+export SKIP_ABI_CHECKS=true
+
+# Welcome Msg
+echo "=========================================="
+echo " xd. xdroidOS Build Environment "
+echo "=========================================="
+echo "AOSP Revision: $AOSP_REVISION"
