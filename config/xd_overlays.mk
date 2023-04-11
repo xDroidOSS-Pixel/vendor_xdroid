@@ -47,5 +47,4 @@ PRODUCT_PACKAGES += \
     NavigationBarModeGesturalOverlayFS \
     MediaProviderOverlay \
     StorageManagerGoogleOverlay \
-    FlipendoOverlay \
-    NoCombinedIconsOverlay
+    FlipendoOverlay

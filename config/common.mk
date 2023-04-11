@@ -153,9 +153,6 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/xdroid/overlay/dictionaries
 # and breaks WPA Supplicant compilation.
 DISABLE_EAP_PROXY := true
 
-PRODUCT_PACKAGES += \
-    YaapThemesStub
-
 # Pixel Framework
 $(call inherit-product, vendor/pixel-framework/config.mk)
 
