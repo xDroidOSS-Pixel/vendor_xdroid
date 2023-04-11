@@ -25,7 +25,7 @@ $(call inherit-product, vendor/xdroid/config/xd_packages.mk)
 $(call inherit-product, vendor/xdroid/config/xd_props.mk)
 
 # xd. font
-$(call inherit-product, vendor/xdroid/config/font.mk)
+$(call inherit-product, vendor/xdroid/config/fonts.mk)
 
 # xd. signed
 $(call inherit-product, vendor/xdroid/config/xd_signed.mk)
@@ -152,8 +152,6 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/xdroid/overlay/dictionaries
 # Disable EAP Proxy because it depends on proprietary headers
 # and breaks WPA Supplicant compilation.
 DISABLE_EAP_PROXY := true
-
-include vendor/themes/statusbar.mk
 
 PRODUCT_PACKAGES += \
     YaapThemesStub
