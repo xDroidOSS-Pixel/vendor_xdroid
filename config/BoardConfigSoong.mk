@@ -37,7 +37,8 @@ SOONG_CONFIG_xdroidGlobalVars += \
     target_trust_usb_control_path \
     target_trust_usb_control_enable \
     target_trust_usb_control_disable \
-    uses_egl_display_array
+    uses_egl_display_array \
+    needs_oplus_tag
 
 SOONG_CONFIG_NAMESPACES += xdroidNvidiaVars
 SOONG_CONFIG_xdroidNvidiaVars += \
@@ -60,6 +61,7 @@ SOONG_CONFIG_xdroidGlobalVars_uses_egl_display_array := $(TARGET_USES_EGL_DISPLA
 SOONG_CONFIG_xdroidNvidiaVars_uses_nvidia_enhancements := $(NV_ANDROID_FRAMEWORK_ENHANCEMENTS)
 SOONG_CONFIG_xdroidQcomVars_supports_extended_compress_format := $(AUDIO_FEATURE_ENABLED_EXTENDED_COMPRESS_FORMAT)
 SOONG_CONFIG_xdroidQcomVars_uses_pre_uplink_features_netmgrd := $(TARGET_USES_PRE_UPLINK_FEATURES_NETMGRD)
+SOONG_CONFIG_xdroidGlobalVars_needs_oplus_tag := $(TARGET_NEEDS_OPLUS_VENDOR_TAG)
 
 # Set default values
 BOOTLOADER_MESSAGE_OFFSET ?= 0
