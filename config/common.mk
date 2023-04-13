@@ -121,6 +121,9 @@ PRODUCT_RESTRICT_VENDOR_FILES := false
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/xdroid/overlay
 DEVICE_PACKAGE_OVERLAYS += vendor/xdroid/overlay/common
 
+# FRAMEWORK COMPATIBILITY MATRIX FOR LINEAGE HALs
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += vendor/xdroid/config/device_framework_matrix.xml
+
 # Sensitive Phone Numbers list
 PRODUCT_COPY_FILES += \
     vendor/xdroid/prebuilt/common/etc/sensitive_pn.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sensitive_pn.xml
