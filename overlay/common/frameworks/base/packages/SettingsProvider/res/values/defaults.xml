@@ -24,4 +24,7 @@
     <string name="def_immersive_mode_confirmations" translatable="false">confirmed</string>
     
     <bool name="def_wifi_on">true</bool>
+
+    <!-- This is disabled by default, but turned on in SetupWizard -->
+    <bool name="assisted_gps_enabled">false</bool>
 </resources>
