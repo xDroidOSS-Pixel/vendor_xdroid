@@ -31,6 +31,7 @@ SOONG_CONFIG_xdroidGlobalVars += \
     aapt_version_code \
     additional_gralloc_10_usage_bits \
     bootloader_message_offset \
+    gralloc_handle_has_custom_content_md_reserved_size \
     camera_uses_newer_hidl_override_format \
     gralloc_handle_has_reserved_size \
     target_alternative_futex_waiters \
@@ -59,6 +60,7 @@ SOONG_CONFIG_xdroidQcomVars += \
 endif
 
 # Soong bool variables
+SOONG_CONFIG_xdroidGlobalVars_gralloc_handle_has_custom_content_md_reserved_size := $(TARGET_GRALLOC_HANDLE_HAS_CUSTOM_CONTENT_MD_RESERVED_SIZE)
 SOONG_CONFIG_xdroidGlobalVars_gralloc_handle_has_reserved_size := $(TARGET_GRALLOC_HANDLE_HAS_RESERVED_SIZE)
 SOONG_CONFIG_xdroidGlobalVars_uses_egl_display_array := $(TARGET_USES_EGL_DISPLAY_ARRAY)
 SOONG_CONFIG_xdroidNvidiaVars_uses_nvidia_enhancements := $(NV_ANDROID_FRAMEWORK_ENHANCEMENTS)
@@ -71,12 +73,14 @@ SOONG_CONFIG_xdroidGlobalVars_target_alternative_futex_waiters := $(TARGET_ALTER
 # Set default values
 BOOTLOADER_MESSAGE_OFFSET ?= 0
 TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS ?= 0
+TARGET_GRALLOC_HANDLE_HAS_CUSTOM_CONTENT_MD_RESERVED_SIZE ?= false
 TARGET_GRALLOC_HANDLE_HAS_RESERVED_SIZE ?= false
 TARGET_INIT_VENDOR_LIB ?= vendor_init
 TARGET_SURFACEFLINGER_UDFPS_LIB ?= surfaceflinger_udfps_lib
 TARGET_TRUST_USB_CONTROL_PATH ?= /proc/sys/kernel/deny_new_usb
 TARGET_TRUST_USB_CONTROL_ENABLE ?= 1
 TARGET_TRUST_USB_CONTROL_DISABLE ?= 0
+TARGET_GRALLOC_HANDLE_HAS_CUSTOM_CONTENT_MD_RESERVED_SIZE ?= false
 
 # Soong value variables
 SOONG_CONFIG_xdroidGlobalVars_aapt_version_code := $(shell date -u +%Y%m%d)
