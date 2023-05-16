@@ -28,6 +28,7 @@ SOONG_CONFIG_xdroidGlobalVars += \
     aapt_version_code \
     additional_gralloc_10_usage_bits \
     bootloader_message_offset \
+    gralloc_handle_has_custom_content_md_reserved_size \
     camera_needs_client_info \
     disable_postrender_cleanup \
     disable_bluetooth_le_read_buffer_size_v2 \
@@ -77,6 +78,7 @@ SOONG_CONFIG_xdroidQcomVars += \
 endif
 
 # Soong bool variables
+SOONG_CONFIG_xdroidGlobalVars_gralloc_handle_has_custom_content_md_reserved_size := $(TARGET_GRALLOC_HANDLE_HAS_CUSTOM_CONTENT_MD_RESERVED_SIZE)
 SOONG_CONFIG_xdroidGlobalVars_camera_needs_client_info := $(TARGET_CAMERA_NEEDS_CLIENT_INFO)
 SOONG_CONFIG_xdroidGlobalVars_disable_postrender_cleanup := $(TARGET_DISABLE_POSTRENDER_CLEANUP)
 SOONG_CONFIG_xdroidGlobalVars_has_legacy_camera_hal1 := $(TARGET_HAS_LEGACY_CAMERA_HAL1)
@@ -105,6 +107,7 @@ SOONG_CONFIG_xdroidGlobalVars_uses_nothing_camera := $(TARGET_USES_NOTHING_CAMER
 # Set default values
 BOOTLOADER_MESSAGE_OFFSET ?= 0
 TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS ?= 0
+TARGET_GRALLOC_HANDLE_HAS_CUSTOM_CONTENT_MD_RESERVED_SIZE ?= false
 TARGET_GRALLOC_HANDLE_HAS_RESERVED_SIZE ?= false
 TARGET_INIT_VENDOR_LIB ?= vendor_init
 TARGET_INPUTDISPATCHER_SKIP_EVENT_KEY ?= 0
