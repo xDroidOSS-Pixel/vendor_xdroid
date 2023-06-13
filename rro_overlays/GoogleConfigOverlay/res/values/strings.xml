@@ -46,4 +46,5 @@
     <string name="widget_default_class_name">com.android.alarmclock.DigitalAppWidgetProvider</string>
     <string name="widget_default_package_name">com.google.android.deskclock</string>
     <string name="config_defaultCaptivePortalLoginPackageName" translatable="false">com.google.android.captiveportallogin</string>
+    <string name="config_dreamsDefaultComponent" translatable="false">com.google.android.deskclock/com.android.deskclock.Screensaver</string>
 </resources>
