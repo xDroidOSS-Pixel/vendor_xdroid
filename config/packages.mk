@@ -41,7 +41,7 @@ PRODUCT_PACKAGES += \
 # Dex preopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUIGoogle \
-    NexusLauncherRelease
+    Launcher3QuickStep
 
 # Filesystems tools
 PRODUCT_PACKAGES += \
