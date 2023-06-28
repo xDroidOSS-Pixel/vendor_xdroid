@@ -24,7 +24,9 @@ PRODUCT_PACKAGES += \
 
 # Config
 PRODUCT_PACKAGES += \
-    SimpleDeviceConfig
+    SimpleDeviceConfig \
+    ThemePicker \
+    WallpaperPicker2
 
 # GameSpace
 PRODUCT_PACKAGES += \
