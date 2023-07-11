@@ -38,6 +38,7 @@ SOONG_CONFIG_xdroidGlobalVars += \
     gralloc_handle_has_reserved_size \
     needs_camera_boottime \
     needs_netd_direct_connect_rule \
+    camera_uses_newer_hidl_override_format \
     target_init_vendor_lib \
     target_inputdispatcher_skip_event_key \
     target_ld_shim_libs \
@@ -81,6 +82,7 @@ SOONG_CONFIG_xdroidGlobalVars_has_legacy_camera_hal1 := $(TARGET_HAS_LEGACY_CAME
 SOONG_CONFIG_xdroidGlobalVars_has_memfd_backport := $(TARGET_HAS_MEMFD_BACKPORT)
 SOONG_CONFIG_xdroidGlobalVars_ignores_ftp_pptp_conntrack_failure := $(TARGET_IGNORES_FTP_PPTP_CONNTRACK_FAILURE)
 SOONG_CONFIG_xdroidGlobalVars_needs_camera_boottime := $(TARGET_CAMERA_BOOTTIME_TIMESTAMP)
+SOONG_CONFIG_xdroidGlobalVars_camera_uses_newer_hidl_override_format := $(TARGET_CAMERA_USES_NEWER_HIDL_OVERRIDE_FORMAT)
 SOONG_CONFIG_xdroidGlobalVars_needs_netd_direct_connect_rule := $(TARGET_NEEDS_NETD_DIRECT_CONNECT_RULE)
 SOONG_CONFIG_xdroidGlobalVars_target_uses_prebuilt_dynamic_partitions := $(TARGET_USES_PREBUILT_DYNAMIC_PARTITIONS)
 SOONG_CONFIG_xdroidGlobalVars_uses_legacy_fd_fbdev := $(TARGET_USES_LEGACY_FD_FBDEV)
