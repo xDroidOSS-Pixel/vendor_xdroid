@@ -10,72 +10,49 @@ fail: charger/battery_fail
 
 # frame: disp_time min_level max_level
 frame: 300 0 100 # 0
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100 # 5
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100 # 10
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100 # 15
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100 # 20
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100 # 25
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100 # 30
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100 # 35
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100 # 40
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100 # 45
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100 # 50
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100 # 55
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100 # 60
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100 # 65
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
-frame: 15 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100 # 5
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100 # 10
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100 # 15
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100 # 20
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100 # 25
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100 # 30
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100 # 35
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100 # 40
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100
+frame: 0 0 100 # 45
+frame: 0 0 100
