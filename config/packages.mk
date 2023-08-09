@@ -24,7 +24,6 @@ PRODUCT_PACKAGES += \
 
 # Config
 PRODUCT_PACKAGES += \
-    SimpleDeviceConfig \
     ThemePicker \
     WallpaperPicker2
 
