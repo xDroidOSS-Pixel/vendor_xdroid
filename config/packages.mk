@@ -42,6 +42,7 @@ PRODUCT_PACKAGES += \
 # Dex preopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUIGoogle \
+    SettingsGoogle \
     Launcher3QuickStep
 
 # Filesystems tools
