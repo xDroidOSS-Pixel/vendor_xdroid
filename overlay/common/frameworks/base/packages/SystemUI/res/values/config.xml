@@ -31,6 +31,7 @@
     <!-- SystemUI Plugins that can be loaded on user builds. -->
     <string-array name="config_pluginWhitelist" translatable="false">
         <item>com.android.systemui.plugin.globalactions.wallet</item>
+        <item>org.lineageos.settings</item>
     </string-array>
 
     <!-- Icons that don't show in a collapsed non-keyguard statusbar -->
