@@ -5,7 +5,7 @@
 
 export S=/system
 export C=/postinstall/tmp/backupdir
-export V=20.0
+export V=18.0
 
 export ADDOND_VERSION=3
 
@@ -56,7 +56,7 @@ if [ ! -r /system/build.prop ]; then
   echo "Backup/restore is not possible. Partition is probably empty"
   return 1
 fi
-if ! grep -q "^ro.lineage.version=$V.*" /system/build.prop; then
+if ! grep -q "^ro.conquer.version=$V.*" /system/build.prop; then
   echo "Backup/restore is not possible. Incompatible ROM version: $V"
   return 2
 fi
@@ -95,7 +95,7 @@ fi
 ### Mount helpers ###
 #####################
 get_block_for_mount_point() {
-  grep -v "^#" /vendor/etc/fstab.$(getprop ro.boot.hardware) | grep "[[:blank:]]$1[[:blank:]]" | tail -n1 | tr -s [:blank:] ' ' | cut -d' ' -f1
+  grep -v "^#" /vendor/etc/fstab.$(getprop ro.boot.hardware) | grep " $1 " | tail -n1 | tr -s ' ' | cut -d' ' -f1
 }
 
 find_block() {
@@ -145,8 +145,7 @@ fi
 mount_extra() {
   for partition in $@; do
     mnt_point="/postinstall/$partition"
-    mountpoint "$mnt_point" >/dev/null 2>&1 && continue
-    [ -L "$mnt_point" ] && continue
+    mountpoint "$mnt_point" >/dev/null 2>&1 && break
 
     blk_dev=$(find_block "$partition")
     if [ -n "$blk_dev" ]; then
@@ -165,31 +164,23 @@ umount_extra() {
   done
 }
 
-cleanup() {
-  umount_extra $all_V3_partitions
-  umount /postinstall/tmp
-  rm -rf /postinstall/tmp
-}
-
 case "$1" in
   backup)
     if check_prereq; then
       mkdir -p $C
       preserve_addon_d
       run_stages pre-backup backup post-backup
-      umount_extra $all_V3_partitions
-    else
-      cleanup
     fi
   ;;
   restore)
     if check_prereq; then
       run_stages pre-restore restore post-restore
+      umount_extra $all_V3_partitions
       restore_addon_d
-      cleanup
+      rm -rf $C
+      umount /postinstall/tmp
+      rm -rf /postinstall/tmp
       sync
-    else
-      cleanup
     fi
   ;;
   *)

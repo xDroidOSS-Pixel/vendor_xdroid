@@ -6,7 +6,7 @@
 export C=/tmp/backupdir
 export SYSDEV="$(readlink -nf "$2")"
 export SYSFS="$3"
-export V=20.0
+export V=18.0
 
 export ADDOND_VERSION=3
 
@@ -47,7 +47,7 @@ if [ ! -r $S/build.prop ]; then
   echo "Backup/restore is not possible. Partition is probably empty"
   return 1
 fi
-if ! grep -q "^ro.lineage.version=$V.*" $S/build.prop; then
+if ! grep -q "^ro.xdroid.version=$V.*" $S/build.prop; then
   echo "Backup/restore is not possible. Incompatible ROM version: $V"
   return 2
 fi
@@ -69,7 +69,7 @@ if [ -d /tmp/addon.d/ ]; then
       if [ $v -ge 3 ]; then
         $script $stage
       else
-        ADDOND_VERSION= $script $stage
+        ADDOND_VERSION=2 $script $stage
       fi
     done
   done
@@ -104,7 +104,7 @@ unmount_system() {
 }
 
 get_block_for_mount_point() {
-  grep -v "^#" /etc/recovery.fstab | grep "[[:blank:]]$1[[:blank:]]" | tail -n1 | tr -s [:blank:] ' ' | cut -d' ' -f1
+  grep -v "^#" /etc/recovery.fstab | grep " $1 " | tail -n1 | tr -s ' ' | cut -d' ' -f1
 }
 
 find_block() {
@@ -137,17 +137,12 @@ find_block() {
 determine_system_mount
 
 DYNAMIC_PARTITIONS=$(getprop ro.boot.dynamic_partitions)
-if [ "$DYNAMIC_PARTITIONS" = "true" ]; then
-    BLK_PATH="/dev/block/mapper"
-else
-    BLK_PATH=$(dirname "$SYSDEV")
-fi
+BLK_PATH=$(dirname "$SYSDEV")
 
 mount_extra() {
   for partition in $@; do
     mnt_point="/$partition"
-    mountpoint "$mnt_point" >/dev/null 2>&1 && continue
-    [ -L "$SYSMOUNT/$partition" ] && continue
+    mountpoint "$mnt_point" >/dev/null 2>&1 && break
 
     blk_dev=$(find_block "$partition")
     if [ -e "$blk_dev" ]; then
@@ -171,7 +166,6 @@ case "$1" in
       mkdir -p $C
       preserve_addon_d
       run_stages pre-backup backup post-backup
-      umount_extra $all_V3_partitions
     fi
     unmount_system
   ;;
