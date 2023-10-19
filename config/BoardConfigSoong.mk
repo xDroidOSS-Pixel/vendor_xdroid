@@ -74,6 +74,7 @@ SOONG_CONFIG_xdroidGlobalVars_needs_oplus_tag := $(TARGET_NEEDS_OPLUS_VENDOR_TAG
 SOONG_CONFIG_xdroidGlobalVars_camera_override_format_from_reserved := $(TARGET_CAMERA_OVERRIDE_FORMAT_FROM_RESERVED)
 SOONG_CONFIG_xdroidGlobalVars_target_alternative_futex_waiters := $(TARGET_ALTERNATIVE_FUTEX_WAITERS)
 SOONG_CONFIG_xdroidQcomVars_qti_vibrator_use_effect_stream := $(TARGET_QTI_VIBRATOR_USE_EFFECT_STREAM)
+SOONG_CONFIG_xdroidGlobalVars_gralloc_handle_has_ubwcp_format := $(TARGET_GRALLOC_HANDLE_HAS_UBWCP_FORMAT)
 
 # Set default values
 BOOTLOADER_MESSAGE_OFFSET ?= 0
@@ -86,8 +87,8 @@ TARGET_SURFACEFLINGER_UDFPS_LIB ?= surfaceflinger_udfps_lib
 TARGET_TRUST_USB_CONTROL_PATH ?= /proc/sys/kernel/deny_new_usb
 TARGET_TRUST_USB_CONTROL_ENABLE ?= 1
 TARGET_TRUST_USB_CONTROL_DISABLE ?= 0
-TARGET_GRALLOC_HANDLE_HAS_CUSTOM_CONTENT_MD_RESERVED_SIZE ?= false
 TARGET_QTI_VIBRATOR_EFFECT_LIB ?= libqtivibratoreffect
+TARGET_GRALLOC_HANDLE_HAS_UBWCP_FORMAT ?= false
 
 # Soong value variables
 SOONG_CONFIG_xdroidGlobalVars_aapt_version_code := $(shell date -u +%Y%m%d)
