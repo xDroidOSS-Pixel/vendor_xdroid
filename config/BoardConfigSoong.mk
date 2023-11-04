@@ -53,7 +53,9 @@ SOONG_CONFIG_xdroidNvidiaVars += \
 SOONG_CONFIG_NAMESPACES += xdroidQcomVars
 SOONG_CONFIG_xdroidQcomVars += \
     supports_extended_compress_format \
-    uses_pre_uplink_features_netmgrd
+    uses_pre_uplink_features_netmgrd \
+    qti_vibrator_effect_lib \
+    qti_vibrator_use_effect_stream
 
 # Only create display_headers_namespace var if dealing with UM platforms to avoid breaking build for all other platforms
 ifneq ($(filter $(UM_PLATFORMS),$(TARGET_BOARD_PLATFORM)),)
@@ -71,6 +73,7 @@ SOONG_CONFIG_xdroidQcomVars_uses_pre_uplink_features_netmgrd := $(TARGET_USES_PR
 SOONG_CONFIG_xdroidGlobalVars_needs_oplus_tag := $(TARGET_NEEDS_OPLUS_VENDOR_TAG)
 SOONG_CONFIG_xdroidGlobalVars_camera_uses_newer_hidl_override_format := $(TARGET_CAMERA_USES_NEWER_HIDL_OVERRIDE_FORMAT)
 SOONG_CONFIG_xdroidGlobalVars_target_alternative_futex_waiters := $(TARGET_ALTERNATIVE_FUTEX_WAITERS)
+SOONG_CONFIG_xdroidQcomVars_qti_vibrator_use_effect_stream := $(TARGET_QTI_VIBRATOR_USE_EFFECT_STREAM)
 
 # Set default values
 BOOTLOADER_MESSAGE_OFFSET ?= 0
@@ -83,6 +86,7 @@ TARGET_TRUST_USB_CONTROL_PATH ?= /proc/sys/kernel/deny_new_usb
 TARGET_TRUST_USB_CONTROL_ENABLE ?= 1
 TARGET_TRUST_USB_CONTROL_DISABLE ?= 0
 TARGET_GRALLOC_HANDLE_HAS_CUSTOM_CONTENT_MD_RESERVED_SIZE ?= false
+TARGET_QTI_VIBRATOR_EFFECT_LIB ?= libqtivibratoreffect
 
 # Soong value variables
 SOONG_CONFIG_xdroidGlobalVars_aapt_version_code := $(shell date -u +%Y%m%d)
@@ -96,6 +100,7 @@ SOONG_CONFIG_xdroidGlobalVars_target_surfaceflinger_udfps_lib := $(TARGET_SURFAC
 SOONG_CONFIG_xdroidGlobalVars_target_trust_usb_control_path := $(TARGET_TRUST_USB_CONTROL_PATH)
 SOONG_CONFIG_xdroidGlobalVars_target_trust_usb_control_enable := $(TARGET_TRUST_USB_CONTROL_ENABLE)
 SOONG_CONFIG_xdroidGlobalVars_target_trust_usb_control_disable := $(TARGET_TRUST_USB_CONTROL_DISABLE)
+SOONG_CONFIG_xdroidQcomVars_qti_vibrator_effect_lib := $(TARGET_QTI_VIBRATOR_EFFECT_LIB)
 ifneq ($(filter $(QSSI_SUPPORTED_PLATFORMS),$(TARGET_BOARD_PLATFORM)),)
 SOONG_CONFIG_xdroidQcomVars_qcom_display_headers_namespace := vendor/qcom/opensource/commonsys-intf/display
 else
